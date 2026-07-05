@@ -3,416 +3,1352 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>CCIN - Construction & Contrôle</title>
+    <title>Questions</title>
     <style>
       * {
         box-sizing: border-box;
+      }
+
+      :root {
+        --bg: #eadcf0;
+        --phone: #fbfafc;
+        --ink: #16131b;
+        --muted: #8d8692;
+        --line: #ebe7ef;
+        --pink: #f23f97;
+        --purple: #9268c6;
+        --green: #62b84f;
+        --orange: #de9140;
+        --blue: #4d78a8;
       }
 
       html,
       body {
         margin: 0;
         min-height: 100%;
-        font-family: Arial, Helvetica, sans-serif;
-        color: #fff1dc;
-        background: #fff;
+        font-family: Inter, "SF Pro Display", "Segoe UI", Arial, sans-serif;
+        color: var(--ink);
+        background: var(--bg);
       }
 
-      .hero {
+      body {
+        display: grid;
+        place-items: center;
+        padding: 54px 18px 38px;
+      }
+
+      .wrap {
+        display: grid;
+        grid-template-columns: repeat(5, 393px);
+        gap: 34px;
+        align-items: start;
+        justify-content: center;
+      }
+
+      .mockup {
+        display: grid;
+        gap: 19px;
+        justify-items: center;
+      }
+
+      .phone {
+        position: relative;
+        width: 393px;
+        height: 852px;
+        overflow: hidden;
+        background: var(--phone);
+        border: 1px solid rgba(139, 99, 160, 0.2);
+        border-radius: 10px;
+        box-shadow: 0 18px 38px rgba(88, 57, 108, 0.18), inset 0 0 0 1px rgba(255, 255, 255, 0.85);
+      }
+
+      .screen {
+        height: 100%;
+        padding: 25px 28px 92px;
+      }
+
+      .topbar {
+        display: grid;
+        grid-template-columns: 50px 1fr 50px;
+        align-items: center;
+        min-height: 50px;
+      }
+
+      .avatar {
+        display: grid;
+        place-items: center;
+        width: 44px;
+        height: 44px;
+        border-radius: 999px;
+        background: #ffd98b;
+        border: 1px solid #fff;
+        font-size: 28px;
+      }
+
+      h1 {
+        margin: 0;
+        font-size: 28px;
+        font-weight: 900;
+        text-align: center;
+      }
+
+      .bell {
         position: relative;
         display: grid;
-        overflow: hidden;
-        min-height: 100vh;
-        padding: 40px 48px;
-        background-image: url("WhatsApp Image 2026-06-29 at 10.41.06.jpeg");
-        background-position: center;
-        background-size: cover;
-        background-repeat: no-repeat;
+        place-items: center;
+        width: 44px;
+        height: 44px;
+        margin-left: auto;
+        border: 1px solid #e5e0e9;
+        border-radius: 999px;
+        background: #fff;
+        color: #23202a;
+        font-size: 24px;
       }
 
-      .hero::before {
+      .bell::after {
         content: "";
         position: absolute;
-        inset: 0;
-        background: rgba(0, 0, 0, 0.36);
-        z-index: 0;
-      }
-
-      .hero > * {
-        position: relative;
-        z-index: 1;
-      }
-
-      .page-wipe {
-        position: absolute;
-        right: 0;
-        bottom: 0;
-        left: 0;
-        height: 120%;
-        background: #fff;
-        border-radius: 48px 48px 0 0;
-        transform: translateY(105%);
-        transform-origin: bottom center;
-        z-index: 2;
-        pointer-events: none;
-        will-change: transform;
-      }
-
-      .wipe-accent {
-        position: absolute;
-        top: 0;
-        left: 50%;
-        width: min(360px, 46vw);
+        top: 12px;
+        right: 12px;
+        width: 8px;
         height: 8px;
-        background: #ea9b49;
         border-radius: 999px;
-        transform: translate(-50%, -22px) scaleX(0.28);
-        transform-origin: center;
-        opacity: 0;
+        background: var(--pink);
+      }
+
+      .search {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        height: 46px;
+        margin: 22px 0 16px;
+        padding: 0 19px;
+        color: #aaa4af;
+        background: #f3f1f4;
+        border-radius: 10px;
+        font-size: 13px;
+        font-weight: 650;
+      }
+
+      .magnifier {
+        color: #211d25;
+        font-size: 24px;
+        font-weight: 900;
+      }
+
+      .chips {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 14px;
+      }
+
+      .chip {
+        display: grid;
+        place-items: center;
+        height: 32px;
+        min-width: 59px;
+        padding: 0 14px;
+        border-radius: 999px;
+        font-size: 11px;
+        font-weight: 900;
+      }
+
+      .chip.all {
+        color: #fff;
+        background: var(--pink);
+      }
+
+      .chip.math {
+        color: var(--blue);
+        background: #eaf4ff;
+      }
+
+      .chip.fr {
+        color: #a46718;
+        background: #fff2cf;
+      }
+
+      .chip.svt {
+        color: #3f8c36;
+        background: #eaf8df;
+      }
+
+      .chip.en {
+        color: #70519b;
+        background: #f1e8ff;
+      }
+
+      .list {
+        display: grid;
+        gap: 10px;
+      }
+
+      .card {
+        position: relative;
+        display: grid;
+        grid-template-columns: 54px 1fr;
+        gap: 14px;
+        min-height: 112px;
+        padding: 14px 16px;
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        background: #fff;
+        box-shadow: 0 8px 18px rgba(70, 43, 88, 0.04);
+      }
+
+      .icon {
+        display: grid;
+        place-items: center;
+        width: 50px;
+        height: 50px;
+        border-radius: 10px;
+        font-size: 29px;
+      }
+
+      .math-icon {
+        color: var(--purple);
+        background: #f1e7ff;
+      }
+
+      .fr-icon {
+        color: var(--orange);
+        background: #fff0dc;
+      }
+
+      .svt-icon {
+        color: #4eb047;
+        background: #eaf9e4;
+      }
+
+      .en-icon {
+        color: #8262b5;
+        background: #f1e8ff;
+        font-size: 25px;
+      }
+
+      .card h2 {
+        max-width: 170px;
+        margin: 0 0 6px;
+        font-size: 12px;
+        line-height: 1.2;
+        font-weight: 900;
+      }
+
+      .card p {
+        max-width: 190px;
+        margin: 0;
+        color: #332d39;
+        font-size: 11px;
+        line-height: 1.25;
+        font-weight: 650;
+      }
+
+      .subject {
+        position: absolute;
+        top: 14px;
+        right: 14px;
+        display: grid;
+        place-items: center;
+        height: 23px;
+        padding: 0 8px;
+        border-radius: 999px;
+        font-size: 9px;
+        font-weight: 900;
+      }
+
+      .subject.math {
+        color: var(--blue);
+        background: #eaf4ff;
+      }
+
+      .subject.fr {
+        color: #a46718;
+        background: #fff0dc;
+      }
+
+      .subject.svt {
+        color: #3f8c36;
+        background: #eaf8df;
+      }
+
+      .subject.en {
+        color: #70519b;
+        background: #f1e8ff;
+      }
+
+      .status {
+        position: absolute;
+        right: 14px;
+        bottom: 15px;
+        display: grid;
+        place-items: center;
+        height: 23px;
+        padding: 0 8px;
+        border-radius: 999px;
+        font-size: 9px;
+        font-weight: 900;
+      }
+
+      .done {
+        color: #48a13d;
+        background: #e7f8dc;
+      }
+
+      .wait {
+        color: #b57619;
+        background: #fff1c7;
+      }
+
+      .stats {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        margin-top: 8px;
+        font-size: 11px;
+        font-weight: 900;
+      }
+
+      .heart {
+        color: var(--pink);
+      }
+
+      .bottom {
+        position: absolute;
+        right: 19px;
+        bottom: 15px;
+        left: 19px;
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        align-items: end;
+        height: 73px;
+        padding: 8px 5px 4px;
+        background: rgba(255, 255, 255, 0.9);
+        border-top: 1px solid #eee8f0;
       }
 
       .nav {
-        position: absolute;
-        top: 16px;
-        right: 136px;
-        left: 48px;
+        display: grid;
+        gap: 2px;
+        justify-items: center;
+        color: #302b35;
+        font-size: 11px;
+        font-weight: 700;
+      }
+
+      .nav.active {
+        color: var(--pink);
+      }
+
+      .nav-ico {
+        font-size: 25px;
+        line-height: 1;
+      }
+
+      .plus {
+        display: grid;
+        place-items: center;
+        width: 62px;
+        height: 62px;
+        margin-top: -27px;
+        border-radius: 999px;
+        color: #fff;
+        background: var(--pink);
+        box-shadow: 0 8px 16px rgba(242, 63, 151, 0.35);
+        font-size: 40px;
+        font-weight: 300;
+      }
+
+      .caption {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        font-size: 15px;
+        font-weight: 800;
+      }
+
+      .number {
+        display: grid;
+        place-items: center;
+        width: 22px;
+        height: 22px;
+        color: #fff;
+        background: #9666bd;
+        border-radius: 999px;
+        font-size: 12px;
+        font-weight: 900;
+      }
+
+      .detail-screen {
+        padding-top: 25px;
+      }
+
+      .detail-topbar {
+        display: grid;
+        grid-template-columns: 50px 1fr 108px;
+        align-items: center;
+        min-height: 50px;
+      }
+
+      .round-btn {
+        display: grid;
+        place-items: center;
+        width: 44px;
+        height: 44px;
+        border: 1px solid #e5e0e9;
+        border-radius: 999px;
+        background: #fff;
+        color: #1d1922;
+        font-size: 23px;
+        font-weight: 800;
+      }
+
+      .detail-actions {
+        display: flex;
+        justify-content: flex-end;
+        gap: 14px;
+      }
+
+      .plain-action {
+        display: grid;
+        place-items: center;
+        width: 34px;
+        height: 34px;
+        color: #16131b;
+        font-size: 28px;
+        font-weight: 800;
+      }
+
+      .author {
+        display: grid;
+        grid-template-columns: 50px 1fr auto;
+        gap: 14px;
+        align-items: center;
+        margin-top: 22px;
+      }
+
+      .author .avatar {
+        width: 48px;
+        height: 48px;
+        font-size: 30px;
+      }
+
+      .name {
+        margin: 0;
+        font-size: 12px;
+        font-weight: 900;
+      }
+
+      .meta {
+        margin: 3px 0 0;
+        color: #7d7585;
+        font-size: 10px;
+        font-weight: 750;
+      }
+
+      .detail-title {
+        margin: 24px 0 12px;
+        font-size: 24px;
+        line-height: 1.1;
+        font-weight: 900;
+        text-align: left;
+      }
+
+      .detail-copy {
+        margin: 0;
+        max-width: 310px;
+        color: #27222d;
+        font-size: 12px;
+        line-height: 1.34;
+        font-weight: 650;
+      }
+
+      .diagram {
+        display: grid;
+        place-items: center;
+        height: 154px;
+        margin: 16px 0 14px;
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        background-color: #fff;
+        background-image: linear-gradient(#f1eef4 1px, transparent 1px), linear-gradient(90deg, #f1eef4 1px, transparent 1px);
+        background-size: 24px 24px;
+      }
+
+      .triangle {
+        width: 220px;
+        height: 124px;
+      }
+
+      .thanks {
+        margin-top: 0;
+      }
+
+      .detail-reactions {
+        display: flex;
+        align-items: center;
+        gap: 17px;
+        margin: 18px 0 16px;
+        padding: 0 0 14px;
+        border-bottom: 1px solid var(--line);
+        font-size: 12px;
+        font-weight: 900;
+      }
+
+      .reply {
+        display: grid;
+        place-items: center;
+        height: 28px;
+        padding: 0 14px;
+        border-radius: 999px;
+        color: #7b52a5;
+        background: #f3eaff;
+        font-size: 10px;
+        font-weight: 900;
+      }
+
+      .save {
+        margin-left: auto;
+        font-size: 11px;
+      }
+
+      .about {
+        display: grid;
+        gap: 15px;
+        margin-top: 0;
+        padding: 18px 18px;
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        background: #fff;
+        box-shadow: 0 8px 18px rgba(70, 43, 88, 0.04);
+      }
+
+      .about-title {
+        margin: 0 0 3px;
+        font-size: 12px;
+        font-weight: 900;
+      }
+
+      .about-row {
+        display: grid;
+        grid-template-columns: 20px 1fr auto;
+        gap: 14px;
+        align-items: center;
+        color: #2a2530;
+        font-size: 10px;
+        font-weight: 650;
+      }
+
+      .tiny-pill {
+        display: grid;
+        place-items: center;
+        min-width: 38px;
+        height: 23px;
+        padding: 0 9px;
+        border-radius: 999px;
+        font-size: 9px;
+        font-weight: 900;
+      }
+
+      .tiny-pill.cm2 {
+        color: #a46718;
+        background: #fff0dc;
+      }
+
+      .tiny-pill.homework {
+        color: #70519b;
+        background: #f1e8ff;
+      }
+
+      .answers-screen {
+        padding-top: 25px;
+      }
+
+      .page-title {
+        margin: 0;
+        font-size: 17px;
+        font-weight: 900;
+        text-align: center;
+      }
+
+      .question-summary {
+        display: grid;
+        grid-template-columns: 58px 1fr auto;
+        gap: 14px;
+        align-items: center;
+        margin: 28px 0 20px;
+        padding: 15px 16px;
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        background: #fff;
+      }
+
+      .question-summary h2 {
+        margin: 0 0 6px;
+        font-size: 15px;
+        line-height: 1.18;
+        font-weight: 900;
+      }
+
+      .summary-icon {
+        display: grid;
+        place-items: center;
+        width: 52px;
+        height: 52px;
+        border-radius: 10px;
+        color: var(--purple);
+        background: #f1e7ff;
+        font-size: 29px;
+      }
+
+      .tabs {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        font-size: 10px;
-        font-weight: 800;
-        text-transform: uppercase;
+        margin-bottom: 14px;
+        border-bottom: 1px solid var(--line);
       }
 
-      .logo {
-        display: block;
-        width: 150px;
-        height: auto;
-      }
-
-      .logo-wrap {
-        display: inline-flex;
-        align-items: center;
-      }
-
-      .nav-links {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 10px 24px;
-        align-items: center;
-        justify-content: flex-end;
-      }
-
-      .nav a {
-        color: inherit;
-        text-decoration: none;
-      }
-
-      .side-label {
-        position: absolute;
-        top: 0;
-        right: 0;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 86px;
-        height: 220px;
-        background: #ea9b49;
-        color: #142b41;
-        font-family: "Aero", "Aero 03", "Arial Black", Arial, Helvetica, sans-serif;
-        font-size: 10px;
+      .tab {
+        padding-bottom: 12px;
+        font-size: 11px;
         font-weight: 900;
-        letter-spacing: 0.02em;
-        text-transform: uppercase;
-        writing-mode: vertical-rl;
       }
 
-      .side-label::before {
-        content: "";
-        width: 11px;
-        height: 11px;
-        margin-bottom: 16px;
+      .tab.active {
+        border-bottom: 3px solid var(--pink);
+      }
+
+      .badge {
+        display: inline-grid;
+        place-items: center;
+        min-width: 18px;
+        height: 15px;
+        margin-left: 5px;
         border-radius: 999px;
-        background: #142b41;
-      }
-
-      .eyebrow {
-        position: absolute;
-        top: 60px;
-        left: 29%;
-        margin: 0;
-        font-size: 16px;
+        color: #fff;
+        background: var(--pink);
+        font-size: 9px;
         font-weight: 900;
-        line-height: 1;
-        text-transform: uppercase;
       }
 
-      .main-copy {
-        position: absolute;
-        right: 7%;
-        bottom: 42%;
-        max-width: 520px;
-        margin: 0;
-        font-size: clamp(17px, 1.55vw, 27px);
+      .answers-list {
+        display: grid;
+        gap: 14px;
+      }
+
+      .answer-card {
+        display: grid;
+        grid-template-columns: 45px 1fr;
+        gap: 13px;
+        padding: 17px 16px;
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        background: #fff;
+        box-shadow: 0 8px 18px rgba(70, 43, 88, 0.04);
+      }
+
+      .answer-card.best {
+        border-color: #cbeeb8;
+        background: #effbe8;
+      }
+
+      .answer-avatar {
+        display: grid;
+        place-items: center;
+        width: 42px;
+        height: 42px;
+        border-radius: 999px;
+        background: #dff4d3;
+        font-size: 27px;
+      }
+
+      .answer-head {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 10px;
+        align-items: start;
+      }
+
+      .best-tag {
+        display: grid;
+        place-items: center;
+        height: 22px;
+        padding: 0 9px;
+        border-radius: 999px;
+        color: #4a9f3b;
+        background: #def5d1;
+        font-size: 9px;
         font-weight: 900;
-        line-height: 1.22;
+        white-space: nowrap;
       }
 
-      .info-card {
-        position: absolute;
-        left: 48px;
-        bottom: 56px;
-        width: 260px;
-        min-height: 205px;
-        padding: 20px 22px 18px;
-        background: rgba(185, 145, 105, 0.72);
-        border: 1px solid rgba(255, 241, 220, 0.14);
+      .answer-text {
+        margin: 12px 0 0;
+        color: #25202a;
+        font-size: 13px;
+        line-height: 1.45;
+        font-weight: 650;
       }
 
-      .info-card h2 {
-        margin: 0;
-        font-size: 22px;
+      .answer-actions {
+        display: flex;
+        align-items: center;
+        gap: 24px;
+        margin-top: 14px;
+        font-size: 13px;
         font-weight: 900;
-        line-height: 1.12;
-        text-transform: uppercase;
       }
 
-      .divider {
-        display: block;
+      .validated {
+        margin-left: auto;
+        display: flex;
+        gap: 9px;
+        align-items: center;
+        color: #469938;
+        font-size: 10px;
+        font-weight: 900;
+      }
+
+      .check {
+        display: grid;
+        place-items: center;
+        width: 25px;
+        height: 25px;
+        border-radius: 999px;
+        color: #fff;
+        background: #49ad3f;
+      }
+
+      .comments-screen {
+        padding-top: 25px;
+      }
+
+      .comment-source {
+        display: grid;
+        grid-template-columns: 45px 1fr;
+        gap: 13px;
+        margin: 28px 0 20px;
+        padding: 17px 16px;
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        background: #fff;
+      }
+
+      .source-text {
+        margin: 8px 0 0;
+        color: #25202a;
+        font-size: 12px;
+        line-height: 1.38;
+        font-weight: 650;
+      }
+
+      .comment-count {
+        margin: 0 0 16px;
+        color: #77707e;
+        font-size: 12px;
+        font-weight: 650;
+      }
+
+      .comments-list {
+        display: grid;
+        gap: 15px;
+        padding-bottom: 78px;
+      }
+
+      .comment-row {
+        display: grid;
+        grid-template-columns: 42px 1fr;
+        gap: 13px;
+        align-items: start;
+      }
+
+      .comment-row.right {
+        grid-template-columns: 1fr 42px;
+        padding-left: 54px;
+      }
+
+      .comment-bubble {
+        padding: 15px 17px;
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        font-size: 12px;
+        line-height: 1.4;
+        font-weight: 650;
+      }
+
+      .comment-bubble.pink {
+        border-color: #ffe0ed;
+        background: #ffeaf4;
+      }
+
+      .comment-bubble.green {
+        border-color: #d9f0cc;
+        background: #effbe8;
+      }
+
+      .comment-bubble.lavender {
+        border-color: #eadcf8;
+        background: #f5ecff;
+      }
+
+      .comment-meta {
+        display: flex;
+        gap: 10px;
+        align-items: baseline;
+        margin-bottom: 7px;
+      }
+
+      .comment-name {
+        font-size: 11px;
+        font-weight: 900;
+      }
+
+      .comment-like {
+        display: flex;
+        justify-content: flex-end;
+        gap: 5px;
+        margin-top: 8px;
+        color: var(--pink);
+        font-size: 11px;
+        font-weight: 900;
+      }
+
+      .comment-input {
+        position: absolute;
+        right: 28px;
+        bottom: 92px;
+        left: 28px;
+        display: grid;
+        grid-template-columns: 1fr 44px;
+        gap: 10px;
+        align-items: center;
+      }
+
+      .comment-input input {
         width: 100%;
-        margin: 24px 0 14px;
-        border-top: 2px dotted rgba(255, 241, 220, 0.8);
+        height: 45px;
+        padding: 0 17px;
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        background: #fff;
+        color: #9b94a0;
+        font: inherit;
+        font-size: 12px;
+        font-weight: 650;
       }
 
-      .info-card p {
-        margin: 0;
-        font-size: 16px;
+      .send {
+        display: grid;
+        place-items: center;
+        width: 44px;
+        height: 44px;
+        border-radius: 999px;
+        color: #fff;
+        background: var(--pink);
+        box-shadow: 0 8px 16px rgba(242, 63, 151, 0.28);
+        font-size: 26px;
         font-weight: 900;
-        line-height: 1.35;
-        text-align: right;
       }
 
-      .scroll {
-        position: absolute;
-        left: 50%;
-        bottom: 34px;
+      .ask-screen {
+        padding-top: 25px;
+      }
+
+      .ask-form {
+        display: grid;
+        gap: 18px;
+        margin-top: 28px;
+      }
+
+      .form-group {
+        display: grid;
+        gap: 10px;
+      }
+
+      label {
+        font-size: 12px;
+        font-weight: 900;
+      }
+
+      .field {
+        display: flex;
+        align-items: center;
+        min-height: 48px;
+        padding: 0 17px;
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        background: #fff;
+        color: #a49da8;
+        font-size: 12px;
+        font-weight: 650;
+      }
+
+      .select-field {
+        justify-content: space-between;
+      }
+
+      .select-left {
         display: flex;
         gap: 14px;
         align-items: center;
-        transform: translateX(-50%);
-        font-size: 16px;
-        font-weight: 900;
-        text-transform: uppercase;
       }
 
-      .scroll-icon {
+      .select-icon {
         display: grid;
         place-items: center;
-        width: 36px;
-        height: 36px;
-        border: 2px dotted rgba(255, 241, 220, 0.8);
-        border-radius: 999px;
+        width: 34px;
+        height: 34px;
+        border-radius: 10px;
+        background: #fff0dc;
         font-size: 18px;
       }
 
-      .next-section {
-        min-height: 100vh;
-        padding: 104px 48px;
-        background: #fff;
-        color: #142b41;
+      .select-icon.level {
+        background: #f2e8ff;
       }
 
-      .next-section-inner {
-        width: min(1040px, 100%);
-        margin: 0 auto;
+      .textarea-field {
+        position: relative;
+        align-items: flex-start;
+        min-height: 150px;
+        padding-top: 18px;
+        line-height: 1.38;
       }
 
-      .next-section h2 {
-        max-width: 760px;
-        margin: 0 0 24px;
-        color: #142b41;
-        font-size: clamp(36px, 6vw, 78px);
-        font-weight: 900;
-        line-height: 0.96;
-        text-transform: uppercase;
-      }
-
-      .next-section p {
-        max-width: 600px;
-        margin: 0;
-        color: #32485b;
-        font-size: clamp(18px, 2vw, 24px);
+      .counter {
+        position: absolute;
+        right: 14px;
+        bottom: 12px;
+        color: #b1aab5;
+        font-size: 10px;
         font-weight: 700;
-        line-height: 1.42;
       }
 
-      @media (max-width: 900px) {
-        .hero {
-          padding: 28px 22px;
-        }
+      .optional {
+        color: #8d8692;
+        font-weight: 700;
+      }
 
-        .nav {
-          right: 22px;
-          left: 22px;
-          gap: 16px;
-          align-items: flex-start;
-          font-size: 10px;
-        }
+      .upload-field {
+        justify-content: center;
+        min-height: 70px;
+        border-style: dashed;
+        text-align: center;
+      }
 
-        .side-label {
-          width: 58px;
-          height: 190px;
-          font-size: 9px;
-        }
+      .upload-inner {
+        display: flex;
+        gap: 16px;
+        align-items: center;
+        color: #918a96;
+        font-size: 11px;
+        line-height: 1.35;
+      }
 
-        .logo {
-          width: 110px;
-        }
+      .upload-icon {
+        color: #25202a;
+        font-size: 24px;
+      }
 
-        .nav-links {
-          max-width: calc(100% - 128px);
-          gap: 10px 14px;
-        }
+      .publish {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 11px;
+        width: 100%;
+        height: 50px;
+        border: 0;
+        border-radius: 10px;
+        color: #fff;
+        background: var(--pink);
+        box-shadow: 0 10px 18px rgba(242, 63, 151, 0.28);
+        font-size: 15px;
+        font-weight: 900;
+      }
 
-        .eyebrow {
-          top: 86px;
-          left: 22px;
-          font-size: 16px;
-        }
-
-        .main-copy {
-          right: 22px;
-          bottom: 310px;
-          left: 22px;
-          max-width: none;
-          font-size: 28px;
-        }
-
-        .info-card {
-          right: 22px;
-          bottom: 76px;
-          left: 22px;
-          width: auto;
-          min-height: 230px;
-          padding: 28px 24px;
-        }
-
-        .info-card h2 {
-          font-size: 25px;
-        }
-
-        .divider {
-          margin: 42px 0 20px;
-        }
-
-        .info-card p {
-          font-size: 18px;
-        }
-
-        .scroll {
-          display: none;
-        }
-
-        .next-section {
-          padding: 82px 22px;
-        }
-
-        .page-wipe {
-          border-radius: 32px 32px 0 0;
+      @media (max-width: 420px) {
+        body {
+          padding-top: 24px;
         }
       }
 
-      @media (max-width: 560px) {
-        .nav {
-          flex-direction: column;
-        }
-
-        .nav-links {
-          max-width: 100%;
-          justify-content: flex-start;
-        }
-
-        .side-label {
-          display: none;
+      @media (max-width: 860px) {
+        .wrap {
+          grid-template-columns: 393px;
         }
       }
     </style>
   </head>
   <body>
-    <main class="hero">
-      <div class="page-wipe" aria-hidden="true">
-        <span class="wipe-accent"></span>
-      </div>
+    <main class="wrap" aria-label="Maquettes Questions">
+      <article class="mockup">
+        <section class="phone">
+          <div class="screen">
+            <header class="topbar">
+              <div class="avatar">👩‍🎓</div>
+              <h1>Questions</h1>
+              <div class="bell">⌾</div>
+            </header>
 
-      <nav class="nav" aria-label="Navigation principale">
-        <a class="logo-wrap" href="https://ccin-web.vercel.app/" aria-label="JCIN Logo">
-          <img class="logo" src="Logo blanc.png" alt="JCIN Logo">
-        </a>
-        <div class="nav-links">
-          <a href="https://ccin-web.vercel.app/">Accueil</a>
-          <a href="https://ccin-web.vercel.app/about">À propos</a>
-          <a href="https://ccin-web.vercel.app/services">Services</a>
-          <a href="https://ccin-web.vercel.app/projects">Réalisations</a>
-          <a href="https://ccin-web.vercel.app/contact">Contact</a>
-        </div>
-      </nav>
+            <div class="search">
+              <span class="magnifier">⌕</span>
+              <span>Rechercher une question...</span>
+            </div>
 
-      <aside class="side-label">Construction & contrôle</aside>
+            <div class="chips">
+              <span class="chip all">Tous</span>
+              <span class="chip math">Maths</span>
+              <span class="chip fr">Français</span>
+              <span class="chip svt">SVT</span>
+              <span class="chip en">Anglais</span>
+            </div>
 
-      <p class="main-copy">
-        Leader en construction & contrôle
-      </p>
+            <div class="list">
+              <article class="card">
+                <div class="icon math-icon">▲</div>
+                <div>
+                  <h2>Calculer l'aire d'un triangle</h2>
+                  <p>Voici un triangle rectangle avec une base de 8 cm et une hauteur de 5 cm.</p>
+                  <div class="stats"><span>12 réponses</span><span class="heart">♥</span><span>25</span></div>
+                </div>
+                <span class="subject math">Maths</span>
+                <span class="status done">Résolu</span>
+              </article>
 
-      <section class="info-card" aria-label="Informations">
-        <h2>Bâtir l'excellence<br>sans compromis</h2>
-        <span class="divider"></span>
-        <p>CCIN transforme vos visions en infrastructures durables. Une expertise technique de pointe pour des projets qui défient le temps.</p>
-      </section>
+              <article class="card">
+                <div class="icon fr-icon">▥</div>
+                <div>
+                  <h2>Conjugaison : le passé composé</h2>
+                  <p>Comment accorder le participe passé avec l'auxiliaire avoir ?</p>
+                  <div class="stats"><span>8 réponses</span><span class="heart">♥</span><span>14</span></div>
+                </div>
+                <span class="subject fr">Français</span>
+                <span class="status wait">En attente</span>
+              </article>
 
-      <div class="scroll" aria-hidden="true">
-        <span class="scroll-icon">⌄</span>
-        <span>Des infrastructures neuves</span>
-      </div>
+              <article class="card">
+                <div class="icon svt-icon">●</div>
+                <div>
+                  <h2>La photosynthèse</h2>
+                  <p>Peux-tu expliquer le rôle de la lumière dans la photosynthèse ?</p>
+                  <div class="stats"><span>5 réponses</span><span class="heart">♥</span><span>9</span></div>
+                </div>
+                <span class="subject svt">SVT</span>
+                <span class="status done">Résolu</span>
+              </article>
 
+              <article class="card">
+                <div class="icon en-icon">•••</div>
+                <div>
+                  <h2>How to use “used to” ?</h2>
+                  <p>Je ne comprends pas quand utiliser “used to” en anglais.</p>
+                  <div class="stats"><span>4 réponses</span><span class="heart">♥</span><span>6</span></div>
+                </div>
+                <span class="subject en">Anglais</span>
+                <span class="status wait">En attente</span>
+              </article>
+            </div>
+          </div>
+
+          <nav class="bottom" aria-label="Navigation">
+            <span class="nav"><span class="nav-ico">⌂</span>Accueil</span>
+            <span class="nav active"><span class="nav-ico">⌕</span>Questions</span>
+            <span class="nav"><span class="plus">+</span></span>
+            <span class="nav"><span class="nav-ico">▣</span>Messages</span>
+            <span class="nav"><span class="nav-ico">♙</span>Profil</span>
+          </nav>
+        </section>
+
+        <div class="caption"><span class="number">1</span>Questions</div>
+      </article>
+
+      <article class="mockup">
+        <section class="phone">
+          <div class="screen detail-screen">
+            <header class="detail-topbar">
+              <span class="round-btn">‹</span>
+              <span></span>
+              <div class="detail-actions">
+                <span class="plain-action">▱</span>
+                <span class="plain-action">···</span>
+              </div>
+            </header>
+
+            <div class="author">
+              <div class="avatar">👩‍🎓</div>
+              <div>
+                <p class="name">Lina</p>
+                <p class="meta">CM2 • il y a 2 h</p>
+              </div>
+              <span class="subject math" style="position:static">Maths</span>
+            </div>
+
+            <h1 class="detail-title">Calculer l'aire d'un triangle</h1>
+            <p class="detail-copy">Voici un triangle rectangle avec une base de 8 cm et une hauteur de 5 cm. Quelle est son aire ?</p>
+
+            <div class="diagram" aria-label="Triangle rectangle">
+              <svg class="triangle" viewBox="0 0 260 150" role="img" aria-label="Triangle de base 8 cm et hauteur 5 cm">
+                <path d="M54 124 H228 L54 28 Z" fill="#dcd3ff" stroke="#17131f" stroke-width="3"/>
+                <path d="M54 124 V104 H74" fill="none" stroke="#17131f" stroke-width="3"/>
+                <text x="50" y="21" font-size="16" font-weight="800">A</text>
+                <text x="12" y="82" font-size="16" font-weight="800">5 cm</text>
+                <text x="135" y="145" font-size="16" font-weight="800">8 cm</text>
+              </svg>
+            </div>
+
+            <p class="detail-copy thanks">Merci d'avance pour votre aide ! 🙂</p>
+
+            <div class="detail-reactions">
+              <span class="heart">♥</span><span>25</span>
+              <span>♡</span><span>12</span>
+              <span class="reply">Répondre</span>
+              <span class="save">▱ Enregistrer</span>
+            </div>
+
+            <section class="about">
+              <h2 class="about-title">À propos de la question</h2>
+              <div class="about-row"><span>⌾</span><span>Niveau</span><span class="tiny-pill cm2">CM2</span></div>
+              <div class="about-row"><span>◉</span><span>Vue</span><strong>78</strong></div>
+              <div class="about-row"><span>▢</span><span>Posée dans</span><span class="tiny-pill homework">Devoirs à la maison</span></div>
+            </section>
+          </div>
+
+          <nav class="bottom" aria-label="Navigation">
+            <span class="nav"><span class="nav-ico">⌂</span>Accueil</span>
+            <span class="nav active"><span class="nav-ico">⌕</span>Questions</span>
+            <span class="nav"><span class="plus">+</span></span>
+            <span class="nav"><span class="nav-ico">▣</span>Messages</span>
+            <span class="nav"><span class="nav-ico">♙</span>Profil</span>
+          </nav>
+        </section>
+
+        <div class="caption"><span class="number">2</span>Question detail</div>
+      </article>
+
+      <article class="mockup">
+        <section class="phone">
+          <div class="screen answers-screen">
+            <header class="detail-topbar">
+              <span class="round-btn">‹</span>
+              <h1 class="page-title">Réponses</h1>
+              <div class="detail-actions">
+                <span class="plain-action">···</span>
+              </div>
+            </header>
+
+            <section class="question-summary">
+              <div class="summary-icon">▲</div>
+              <div>
+                <h2>Calculer l'aire d'un triangle</h2>
+                <p class="meta">Lina • CM2 • il y a 2 h</p>
+              </div>
+              <span class="subject math" style="position:static">Maths</span>
+            </section>
+
+            <div class="tabs">
+              <span class="tab active">Toutes les réponses <span class="badge">12</span></span>
+              <span class="tab">Les plus récentes⌄</span>
+            </div>
+
+            <div class="answers-list">
+              <article class="answer-card best">
+                <div class="answer-avatar">👦</div>
+                <div>
+                  <div class="answer-head">
+                    <div>
+                      <p class="name">Noah</p>
+                      <p class="meta">CM2 • il y a 1 h</p>
+                    </div>
+                    <span class="best-tag">★ Meilleure réponse</span>
+                  </div>
+                  <p class="answer-text">L'aire d'un triangle rectangle se calcule ainsi :<br>Aire = (base × hauteur) ÷ 2<br>= (8 × 5) ÷ 2 = 20 cm²<br>L'aire du triangle est donc 20 cm².</p>
+                  <div class="answer-actions">
+                    <span class="heart">♥ 18</span>
+                    <span>♡ 2</span>
+                    <span class="validated">Validée <span class="check">✓</span></span>
+                  </div>
+                </div>
+              </article>
+
+              <article class="answer-card">
+                <div class="answer-avatar">👧</div>
+                <div>
+                  <p class="name">Clara</p>
+                  <p class="meta">CM2 • il y a 55 min</p>
+                  <p class="answer-text">Super explication ! 👍<br>Merci beaucoup !</p>
+                  <div class="answer-actions"><span>♡ 9</span><span>♡ 1</span></div>
+                </div>
+              </article>
+
+              <article class="answer-card">
+                <div class="answer-avatar">👦</div>
+                <div>
+                  <p class="name">Ethan</p>
+                  <p class="meta">CM1 • il y a 40 min</p>
+                  <p class="answer-text">On peut aussi utiliser la formule :<br>(b × h) / 2. Ça marche bien !</p>
+                  <div class="answer-actions"><span>♡ 7</span><span>♡ 1</span></div>
+                </div>
+              </article>
+            </div>
+          </div>
+
+          <nav class="bottom" aria-label="Navigation">
+            <span class="nav"><span class="nav-ico">⌂</span>Accueil</span>
+            <span class="nav active"><span class="nav-ico">⌕</span>Questions</span>
+            <span class="nav"><span class="plus">+</span></span>
+            <span class="nav"><span class="nav-ico">▣</span>Messages</span>
+            <span class="nav"><span class="nav-ico">♙</span>Profil</span>
+          </nav>
+        </section>
+
+        <div class="caption"><span class="number">3</span>Réponses</div>
+      </article>
+
+      <article class="mockup">
+        <section class="phone">
+          <div class="screen comments-screen">
+            <header class="detail-topbar">
+              <span class="round-btn">‹</span>
+              <h1 class="page-title">Commentaires</h1>
+              <div class="detail-actions">
+                <span class="plain-action">···</span>
+              </div>
+            </header>
+
+            <section class="comment-source">
+              <div class="answer-avatar">👦</div>
+              <div>
+                <div class="answer-head">
+                  <div>
+                    <p class="name">Noah</p>
+                    <p class="meta">Réponse • il y a 1 h</p>
+                  </div>
+                  <span class="best-tag">★ Meilleure réponse</span>
+                </div>
+                <p class="source-text">L'aire d'un triangle rectangle se calcule ainsi : Aire = (base × hauteur) ÷ 2...</p>
+              </div>
+            </section>
+
+            <p class="comment-count">5 commentaires</p>
+
+            <div class="comments-list">
+              <div class="comment-row">
+                <div class="avatar">👩‍🎓</div>
+                <div class="comment-bubble pink">
+                  <div class="comment-meta"><span class="comment-name">Lina</span><span class="meta">il y a 50 min</span></div>
+                  Merci Noah, c'est très clair ! Peux-tu m'expliquer pourquoi on divise par 2 ?
+                  <div class="comment-like">♥ 2</div>
+                </div>
+              </div>
+
+              <div class="comment-row right">
+                <div class="comment-bubble green">
+                  <div class="comment-meta"><span class="comment-name">Noah</span><span class="meta">il y a 45 min</span></div>
+                  Parce qu'un triangle est la moitié d'un rectangle de même base et hauteur ! 🙂
+                  <div class="comment-like">♥ 3</div>
+                </div>
+                <div class="answer-avatar">👦</div>
+              </div>
+
+              <div class="comment-row">
+                <div class="answer-avatar">👦</div>
+                <div class="comment-bubble lavender">
+                  <div class="comment-meta"><span class="comment-name">Hugo</span><span class="meta">il y a 30 min</span></div>
+                  Est-ce que ça fonctionne aussi si le triangle n'est pas rectangle ?
+                  <div class="comment-like">♥ 1</div>
+                </div>
+              </div>
+
+              <div class="comment-row right">
+                <div class="comment-bubble green">
+                  <div class="comment-meta"><span class="comment-name">Noah</span><span class="meta">il y a 25 min</span></div>
+                  Oui ! La formule est la même : Aire = (base × hauteur) ÷ 2 🙂
+                  <div class="comment-like">♥ 2</div>
+                </div>
+                <div class="answer-avatar">👦</div>
+              </div>
+            </div>
+
+            <div class="comment-input">
+              <input value="Ajouter un commentaire..." aria-label="Ajouter un commentaire">
+              <span class="send">›</span>
+            </div>
+          </div>
+
+          <nav class="bottom" aria-label="Navigation">
+            <span class="nav"><span class="nav-ico">⌂</span>Accueil</span>
+            <span class="nav active"><span class="nav-ico">⌕</span>Questions</span>
+            <span class="nav"><span class="plus">+</span></span>
+            <span class="nav"><span class="nav-ico">▣</span>Messages</span>
+            <span class="nav"><span class="nav-ico">♙</span>Profil</span>
+          </nav>
+        </section>
+
+        <div class="caption"><span class="number">4</span>Commentaires</div>
+      </article>
+
+      <article class="mockup">
+        <section class="phone">
+          <div class="screen ask-screen">
+            <header class="detail-topbar">
+              <span class="round-btn">‹</span>
+              <h1 class="page-title">Poser une question</h1>
+              <span></span>
+            </header>
+
+            <form class="ask-form">
+              <div class="form-group">
+                <label>Titre</label>
+                <div class="field">Ex : Calculer l'aire d'un triangle.</div>
+              </div>
+
+              <div class="form-group">
+                <label>Matière</label>
+                <div class="field select-field">
+                  <span class="select-left"><span class="select-icon">▥</span>Choisir une matière</span>
+                  <span>⌄</span>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label>Niveau</label>
+                <div class="field select-field">
+                  <span class="select-left"><span class="select-icon level">◒</span>Choisir un niveau</span>
+                  <span>⌄</span>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label>Décris ton problème</label>
+                <div class="field textarea-field">
+                  Décris ici ton exercice ou ta question aussi précisément que possible...
+                  <span class="counter">0/500</span>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label>Ajouter une image <span class="optional">(optionnel)</span></label>
+                <div class="field upload-field">
+                  <span class="upload-inner"><span class="upload-icon">▣</span><span>Appuie pour ajouter une image<br>JPG, PNG max. 5 Mo</span></span>
+                </div>
+              </div>
+
+              <button class="publish" type="button">✈ Publier</button>
+            </form>
+          </div>
+
+          <nav class="bottom" aria-label="Navigation">
+            <span class="nav"><span class="nav-ico">⌂</span>Accueil</span>
+            <span class="nav active"><span class="nav-ico">⌕</span>Questions</span>
+            <span class="nav"><span class="plus">+</span></span>
+            <span class="nav"><span class="nav-ico">▣</span>Messages</span>
+            <span class="nav"><span class="nav-ico">♙</span>Profil</span>
+          </nav>
+        </section>
+
+        <div class="caption"><span class="number">5</span>Poser une question</div>
+      </article>
     </main>
-    <section class="next-section" aria-label="Section suivante">
-      <div class="next-section-inner">
-        <h2>Des infrastructures neuves, durables et maîtrisées.</h2>
-        <p>CCIN accompagne vos projets de construction et de contrôle avec rigueur, expertise technique et exigence de qualité.</p>
-      </div>
-    </section>
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
-    <script>
-      gsap.registerPlugin(ScrollTrigger);
-
-      gsap.timeline({
-        scrollTrigger: {
-          trigger: ".hero",
-          start: "top top",
-          end: "+=115%",
-          scrub: true,
-          pin: true
-        }
-      })
-      .fromTo(".page-wipe", {
-        yPercent: 105,
-        scaleX: 0.96
-      }, {
-        yPercent: 0,
-        scaleX: 1,
-        ease: "power2.out",
-        duration: 0.82
-      })
-      .fromTo(".wipe-accent", {
-        opacity: 1,
-        scaleX: 0.28
-      }, {
-        opacity: 0,
-        scaleX: 1,
-        ease: "power1.out",
-        duration: 0.34
-      }, 0.08);
-    </script>
   </body>
 </html>
